@@ -10,6 +10,7 @@
         .urgent { border-left-color: #dc3545; background-color: #fff5f5; }
         .normal { border-left-color: #198754; }
         .progress { height: 25px; }
+        footer { margin-top: 50px; border-top: 1px solid #dee2e6; }
     </style>
 </head>
 <body class="bg-light">
@@ -25,16 +26,22 @@
         <div class="row mb-4">
             <div class="col">
                 <h2>Collection Dashboard</h2>
-                <p class="text-muted">Real-time status of council-managed smart bins.</p>
+                <p class="text-muted">Real-time monitoring for the Council Waste Officer.</p>
+                <div class="alert alert-info py-2" id="action-log">
+                    System Status: Monitoring active bins...
+                </div>
             </div>
         </div>
 
         <div id="bin-container" class="row"></div>
     </div>
 
+    <footer class="text-center py-4 text-muted bg-white">
+        <p>SWMS Prototype &copy; 2026 | Student ID: [YOUR-ID-HERE] | Prototype Version 1.0</p>
+    </footer>
+
     <script>
-        // Data Tier (Mocked for Prototype)
-        // I used a simple array to represent the real-time database
+        // DATA TIER: Mocked dataset representing the backend database
         let bins = [
             { id: 1, location: "High Street - North", fill: 45 },
             { id: 2, location: "Westminster Library", fill: 82 },
@@ -42,20 +49,25 @@
             { id: 4, location: "Student Union", fill: 90 }
         ];
 
-        // Logic Tier: The Algorithm
-        // Refined this after PPRS feedback to ensure 80% is the measurable goal
+        // LOGIC TIER: The Algorithm
+        // Refined based on Jack Ingram's feedback to ensure measurable success
         function renderBins() {
             const container = document.getElementById('bin-container');
+            const log = document.getElementById('action-log');
             container.innerHTML = ''; 
 
+            let urgentCount = 0;
+
             bins.forEach(bin => {
-                // Threshold Logic: Following supervisor advice for clear measurability
+                // Threshold Logic: 80% marks the 'Urgent' status for Council efficiency
                 const isUrgent = bin.fill >= 80; 
+                if(isUrgent) urgentCount++;
+
                 const statusLabel = isUrgent ? "URGENT - ACTION REQUIRED" : "Status: Normal";
                 const cardClass = isUrgent ? "urgent" : "normal";
                 const progressClass = isUrgent ? "bg-danger" : "bg-success";
 
-                // Presentation Tier: Building the UI dynamically
+                // PRESENTATION TIER: Dynamic UI Generation
                 container.innerHTML += `
                     <div class="col-md-6 mb-3">
                         <div class="card bin-card ${cardClass} shadow-sm">
@@ -73,9 +85,12 @@
                     </div>
                 `;
             });
+
+            // Update log to show "Human" logic at work
+            log.innerHTML = `System Status: Monitoring 4 bins. <strong>${urgentCount} bins require immediate collection.</strong>`;
         }
 
-        // Simulation feature to show the 80% logic working in the demo video
+        // Feature for Demo: Simulates real-world waste accumulation
         function simulateUpdate() {
             bins.forEach(bin => {
                 let change = Math.floor(Math.random() * 21) - 5; 
@@ -84,7 +99,8 @@
             renderBins();
         }
 
-        renderBins(); // Initial load
+        // Initial call to display data on load
+        renderBins();
     </script>
 </body>
 </html>
