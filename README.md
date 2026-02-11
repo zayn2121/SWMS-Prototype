@@ -16,6 +16,6 @@ Logic Tier: JavaScript algorithm for threshold monitoring.
 Data Tier: Mocked JSON-style data array for prototype verification.
 
 👤 Student Information
-Name: [zakaeia omar]
+Name: [zakaria omar]
 
 Student ID: [w1824072]
