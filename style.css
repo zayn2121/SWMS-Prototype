@@ -1,0 +1,15 @@
+/* PRESENTATION TIER (STYLING): Translates logic into visual alerts */
+
+.bin-card { transition: 0.3s; border-left: 10px solid; }
+
+/* Visual feedback for the Logic Tier alert (FR1) */
+.urgent { 
+    border-left-color: #dc3545; /* Red */
+    background-color: #fff5f5; 
+}
+
+.normal { 
+    border-left-color: #198754; /* Green */
+}
+
+.progress { height: 25px; }
